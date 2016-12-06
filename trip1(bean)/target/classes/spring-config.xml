@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+       <!-- <context:component-scan base-package="com.zgw.boss"/>-->
+        <!--为bean id使用别名-->
+        <!--<alias name="boss" alias="myboss"></alias>
+        <alias name="boss" alias="boss2"></alias>-->
+        <!--spring不仅可以管理pojo,还能用于非bean形式-->
+        <!--Spring IoC容器几乎能管理任何你需要管理的类，不局限于真正的JavaBeans(pojo)。
+        大多数Spring的用户心中，真正的JavaBean是这样的：仅有1个默认的无参构造函数、属性、setter、getter。
+        比如，现在需要使用一个废弃连接池，它肯定不符合JavaBean规范，Spring照样能管理。-->
+    <beans>
+            <!--导入另外一个配置文件-->
+            <import resource="office.xml"></import>
+            <!--为bean设置别名的两种基于xml的方式
+            <alias name="boss" alias="boss3"></alias>
+            每个id可以对应多个name属性，name属性可以作为别名使用
+            别名可以当作bean来使用，但其始终指向id所属的bean,
+            基于java文件的配置文件中可以使用@bean注解来使用别名
+            -->
+            <!--bean的class属性实现了对象的实例化，使用了java的反射机制，不能实例化将抛出BeanDefinition异常
+            $字符，用它来分隔内部类名和外围类名
+            -->
+            <bean id="boss" name="myboss,boss2" class="com.zgw.boss.Boss" scope="singleton">
+                <property name="car" ref="car"></property>
+                    <property name="office" ref="office"></property>
+            </bean>
+            <bean id="car" class="com.zgw.boss.Car">
+                <property name="name" value="奔驰"></property>
+            </bean>
+            <!--<bean id="office" class="com.zgw.boss.Office">
+                <property name="location" value="哈哈哈哈"></property>
+            </bean>-->
+        </beans>
+</beans>

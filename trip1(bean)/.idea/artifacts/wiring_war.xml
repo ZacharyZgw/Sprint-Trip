@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="wiring:war">
+    <output-path>$PROJECT_DIR$/target</output-path>
+    <root id="archive" name="springwiring.war">
+      <element id="artifact" artifact-name="wiring:war exploded" />
+    </root>
+  </artifact>
+</component>
